@@ -15,11 +15,12 @@
     "styled-components": "^6.1.1"
   },
   "jest": {
-    "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest"
+    "testEnvironment": "jest-environment-jsdom",
+  "transform": {
+    "^.+\\.[t|j]sx?$": "babel-jest"
     }
   },
-  "scripts": {
+    "scripts": {
     "start": "node test.js",
     "test": "jest"
   },
@@ -36,6 +37,8 @@
     "@babel/preset-react": "^7.23.3",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^23.0.1"
   }
 }

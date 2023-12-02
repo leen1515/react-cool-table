@@ -1,10 +1,12 @@
 import columns from './utils/columns';
-
+import HeaderTable from './components/HeaderTable';
 
 
 function CoolTable({data}){
-    return (<>
-    </>
+    const columnsName = columns(data);
+    return (<div>
+        <HeaderTable columnsName={columnsName}/>
+    </div>
     )   
 }
 
