@@ -1,35 +1,18 @@
 {
   "name": "react-cool-table",
   "version": "1.0.0",
-  "description": "A cool table for React",
+  "description": "A cool table component for React",
   "main": "index.js",
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leen1515/react-cool-table.git"
   },
-  "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "styled-components": "^6.1.1"
-  },
-  "jest": {
-    "testEnvironment": "jest-environment-jsdom",
-  "transform": {
-    "^.+\\.[t|j]sx?$": "babel-jest"
-    }
-  },
-    "scripts": {
-    "start": "node test.js",
-    "test": "jest"
-  },
+  "keywords": ["react", "table", "component", "styled-components"],
   "author": "Leen",
   "license": "ISC",
-  "dependencies": {
+  "peerDependencies": {
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "styled-components": "^6.1.1"
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
@@ -37,8 +20,26 @@
     "@babel/preset-react": "^7.23.3",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
+    "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "jsdom": "^23.0.1"
+    "styled-components": "^6.1.1"
+  },
+  "scripts": {
+    "start": "node test.js",
+    "test": "jest",
+    "build": "your-build-script-here"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jest-environment-jsdom",
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
   }
 }
