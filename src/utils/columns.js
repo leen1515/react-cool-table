@@ -1,11 +1,15 @@
 export const columns = (data) => {
-    const columns = [];
-    if (data.length === 0) { return columns; }
-    const keys = Object.keys(data[0]);
-    keys.forEach((key) => {
-        columns.push({
-        Header: key
-        });
+  const columnsArray = [];
+  if (!Array.isArray(data) || data.length === 0 || typeof data[0] !== "object" || data[0] == null) {
+    return columnsArray;
+  }
+
+  const keys = Object.keys(data[0]);
+  keys.forEach((key) => {
+    columnsArray.push({
+      Header: key
     });
-    return columns;
-    }
+  });
+
+  return columnsArray;
+};
