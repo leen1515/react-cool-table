@@ -1,6 +1,5 @@
 import React from "react";
-import renderCellValue from "../utils/renderCellValue.js";
-
+import { renderCellValue } from "../utils/renderCellValue";
 
 
 function LinesTable({ linesValues, columnsName }) {
