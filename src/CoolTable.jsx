@@ -3,10 +3,12 @@ import {columns } from "./utils/columns.js";
 import HeaderTable from "./components/HeaderTable.jsx";
 import LinesTable from "./components/LinesTable.jsx";
 import "./style/coolTable.css";
-  
-function CoolTable({ data }) {
+import { columnSelected } from "./utils/columnSelected.js";
+
+function CoolTable({ data, excludedColumns }) {
   if (!data) return null;
-  const columnsName = columns(data);
+  const formatData = columnSelected(data, excludedColumns);
+  const columnsName = columns(formatData);
 
   return (
     <div className="cool-table">

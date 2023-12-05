@@ -32,12 +32,13 @@
 
 }
 .cool-column{
+    flex:1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     border: 1px solid #000;
-    height: 100%;
+    height: 30px;
     padding: 0;
     margin: 0;
 
@@ -51,17 +52,18 @@
     text-align: left;
     border: 1px solid #000;
     width: 100%;
-    height: 100%;
+    height: 30px;
     padding: 0;
     margin: 0;
 }
 
 .cool-cell{
-
+    flex:1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    text-align: left;
     border: 1px solid #000;
     height: 100%;
     padding: 0;

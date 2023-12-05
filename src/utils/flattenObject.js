@@ -1,11 +1,13 @@
-export const flattenObject = (obj, prefix = "") => {
+export const flattenObject = (obj) => {
     const flattened = {};
     Object.keys(obj).forEach((key) => {
-        const newKey = prefix ? `${prefix}.${key}` : key;
         if (typeof obj[key] === "object" && obj[key] !== null && !Array.isArray(obj[key])) {
-            Object.assign(flattened, flattenObject(obj[key], newKey));
+            const flatChild = flattenObject(obj[key]);
+            Object.keys(flatChild).forEach(childKey => {
+                flattened[childKey] = flatChild[childKey];
+            });
         } else {
-            flattened[newKey] = obj[key];
+            flattened[key] = obj[key];
         }
     });
     return flattened;
