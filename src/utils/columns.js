@@ -1,15 +1,10 @@
+import { flattenObject } from "./flattenObject.js";
+
 export const columns = (data) => {
-  const columnsArray = [];
   if (!Array.isArray(data) || data.length === 0 || typeof data[0] !== "object" || data[0] == null) {
-    return columnsArray;
+    return [];
   }
 
-  const keys = Object.keys(data[0]);
-  keys.forEach((key) => {
-    columnsArray.push({
-      Header: key
-    });
-  });
-
-  return columnsArray;
+  const flatData = flattenObject(data[0]);
+  return Object.keys(flatData).map(key => ({ Header: key }));
 };
