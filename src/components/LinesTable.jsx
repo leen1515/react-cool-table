@@ -2,12 +2,9 @@ import usePagination from "../hookperso/usePaginationPerso";
 import PaginationSection from "./PaginationSection.jsx";
 import { renderCellValue } from "../utils/renderCellValue";
 import { flattenObject } from "../utils/flattenObject";
+import React from "react";
 
-import React, {useState} from "react";
-import NumberRowSelector from "./NumberRowSelector.jsx";
-
-function LinesTable({ linesValues, columnsName }) {
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+function LinesTable({ linesValues, columnsName, rowsPerPage }) {
   const { currentPage, totalPages, goToNextPage, goToPrevPage, currentData } = usePagination(linesValues.length, rowsPerPage);
 
   if (!linesValues) return null;
@@ -17,9 +14,7 @@ function LinesTable({ linesValues, columnsName }) {
 
   return (
     <>
-      <div className="cool-body-table">
-      <NumberRowSelector rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} />
-      
+      <div className="cool-body-table">      
         {currentRows.map((line, lineIndex) => {
           const flatLine = flattenObject(line);
           return (
