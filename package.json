@@ -1,6 +1,6 @@
 {
   "name": "react-cool-table",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "A cool table component for React",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
@@ -12,16 +12,13 @@
   },
   "keywords": [
     "react",
-    "table",
-    "component",
-    "styled-components"
+    "table"
   ],
   "author": "Leen",
   "license": "ISC",
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "styled-components": "^6.1.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
