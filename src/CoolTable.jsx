@@ -16,7 +16,11 @@ function CoolTable({ data, excludedColumns }) {
     <div className="cool-table">
       <NumberRowSelector rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} />
       <HeaderTable columnsName={columnsName} />
-      <LinesTable linesValues={data} columnsName={columnsName} />
+      <LinesTable 
+        linesValues={data} 
+        columnsName={columnsName} 
+        rowsPerPage={rowsPerPage} 
+      />
     </div>
   );
 }
