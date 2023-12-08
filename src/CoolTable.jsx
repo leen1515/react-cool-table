@@ -7,18 +7,18 @@ import { columnSelected } from "./utils/columnSelected.js";
 import NumberRowSelector from "./components/NumberRowSelector.jsx";
 
 function CoolTable({ data, excludedColumns }) {
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   if (!data) return null;
   const formatData = columnSelected(data, excludedColumns);
-  const columnsName = columns(formatData);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-
+  const columnsName = columns(formatData, true);
+  const columnsRef = columns(formatData, false);
   return (
     <div className="cool-table">
       <NumberRowSelector rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} />
       <HeaderTable columnsName={columnsName} />
       <LinesTable 
         linesValues={data} 
-        columnsName={columnsName} 
+        columnsName={columnsRef} 
         rowsPerPage={rowsPerPage} 
       />
     </div>
