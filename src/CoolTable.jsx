@@ -8,7 +8,7 @@ import NumberRowSelector from "./components/NumberRowSelector.jsx";
 
 function CoolTable({ data, excludedColumns }) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: "ascending" });
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const formatData = columnSelected(data, excludedColumns);
   const columnsName = columns(formatData, true);
   const columnsRef = columns(formatData, false);
@@ -16,17 +16,12 @@ function CoolTable({ data, excludedColumns }) {
   const handleSortChange = (key) => {
     let direction = "ascending";
     
-    if (sortConfig.key === key) {
-      if (sortConfig.direction === "ascending") {
-        direction = "descending";
-      } else {
-        direction = "ascending"; 
-      }
+    if (sortConfig.key === key && sortConfig.direction !== null) {
+      direction = sortConfig.direction === "ascending" ? "descending" : sortConfig.direction === "descending" ? null : "ascending";
     }
   
     setSortConfig({ key, direction });
   };
-  
   
   const getDataType = (value) => {
     if (!isNaN(Date.parse(value)) && !isNaN(new Date(value).getDate())) {
@@ -37,14 +32,14 @@ function CoolTable({ data, excludedColumns }) {
     return "string";
   };
 
-    const sortedLines = useMemo(() => {
-      let sortableItems = [...formatData];
-      if (sortConfig.key) {
-        sortableItems.sort((a, b) => {
-          const keyParts = sortConfig.key.split(".");
-          const aValue = keyParts.length > 1 ? a[keyParts[0]][keyParts[1]] : a[sortConfig.key];
-          const bValue = keyParts.length > 1 ? b[keyParts[0]][keyParts[1]] : b[sortConfig.key];
-    
+  const sortedLines = useMemo(() => {
+    let sortableItems = [...formatData];
+    if (sortConfig.key && sortConfig.direction !== null) {
+      sortableItems.sort((a, b) => {
+        const keyParts = sortConfig.key.split(".");
+        const aValue = keyParts.length > 1 ? a[keyParts[0]][keyParts[1]] : a[sortConfig.key];
+        const bValue = keyParts.length > 1 ? b[keyParts[0]][keyParts[1]] : b[sortConfig.key];
+
         if (aValue == null && bValue == null) return 0;
         if (aValue == null) return -1;
         if (bValue == null) return 1;
@@ -63,13 +58,12 @@ function CoolTable({ data, excludedColumns }) {
     return sortableItems;
   }, [formatData, sortConfig]);
   
-
   if (!data) return null;
 
   return (
     <div className="cool-table">
       <NumberRowSelector rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} />
-      <HeaderTable columnsName={columnsName} columnsRef={columnsRef} onSortChange={handleSortChange} />
+      <HeaderTable columnsName={columnsName} columnsRef={columnsRef} onSortChange={handleSortChange} sortConfig={sortConfig} />
       <LinesTable linesValues={sortedLines} columnsName={columnsRef} rowsPerPage={rowsPerPage} />
     </div>
   );
