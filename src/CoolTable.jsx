@@ -5,24 +5,37 @@ import LinesTable from "./components/LinesTable.jsx";
 import "./style/coolTable.css";
 import { columnSelected } from "./utils/columnSelected.js";
 import NumberRowSelector from "./components/NumberRowSelector.jsx";
+import { flattenObject } from "./utils/flattenObject.js";
 
 function CoolTable({ data, excludedColumns }) {
+  const [searchQuery, setSearchQuery] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const formatData = columnSelected(data, excludedColumns);
   const columnsName = columns(formatData, true);
   const columnsRef = columns(formatData, false);
 
+  const filteredLines = searchQuery
+    ? formatData.filter(line => {
+      const flatLine = flattenObject(line);
+      return Object.values(flatLine).some(value =>
+        String(value).toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    })
+    : formatData;
+
+
+
   const handleSortChange = (key) => {
     let direction = "ascending";
-    
+
     if (sortConfig.key === key && sortConfig.direction !== null) {
       direction = sortConfig.direction === "ascending" ? "descending" : sortConfig.direction === "descending" ? null : "ascending";
     }
-  
+
     setSortConfig({ key, direction });
   };
-  
+
   const getDataType = (value) => {
     if (!isNaN(Date.parse(value)) && !isNaN(new Date(value).getDate())) {
       return "date";
@@ -33,7 +46,7 @@ function CoolTable({ data, excludedColumns }) {
   };
 
   const sortedLines = useMemo(() => {
-    let sortableItems = [...formatData];
+    let sortableItems = [...filteredLines];
     if (sortConfig.key && sortConfig.direction !== null) {
       sortableItems.sort((a, b) => {
         const keyParts = sortConfig.key.split(".");
@@ -56,12 +69,18 @@ function CoolTable({ data, excludedColumns }) {
       });
     }
     return sortableItems;
-  }, [formatData, sortConfig]);
-  
+  }, [filteredLines, sortConfig]);
+
   if (!data) return null;
 
   return (
     <div className="cool-table">
+      <input
+        type="text"
+        placeholder="Search..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       <NumberRowSelector rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} />
       <HeaderTable columnsName={columnsName} columnsRef={columnsRef} onSortChange={handleSortChange} sortConfig={sortConfig} />
       <LinesTable linesValues={sortedLines} columnsName={columnsRef} rowsPerPage={rowsPerPage} />
