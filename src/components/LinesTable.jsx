@@ -14,22 +14,24 @@ function LinesTable({ linesValues, columnsName, rowsPerPage }) {
 
   return (
     <>
-      <div className="cool-body-table">      
-        {currentRows.map((line, lineIndex) => {
-          const flatLine = flattenObject(line);
-          return (
-            <div className="cool-row-container" key={lineIndex} role="row" data-testid={`row-${lineIndex}`}>
-              {columnsName.map((column, cellIndex) => (
-                <div className="cool-cell"
-                  key={`${lineIndex}-${cellIndex}`}
-                  aria-label={`${column.Header}: ${flatLine[column.Header]}`}
+      <div className="cool-body-table">
+      {currentRows.map((line, lineIndex) => {
+      const flatLine = flattenObject(line);
+      return (
+        <div className="cool-row-container" key={lineIndex}>
+          {columnsName.map((column, cellIndex) => {
+            const cellValue = flatLine[column.dataKey];
+            return (
+              <div className="cool-cell" key={`${lineIndex}-${cellIndex}`}
+              aria-label={`${column.Header}: ${cellValue}`}
                   role="cell"
                   data-testid={`cell-${lineIndex}-${cellIndex}`}
-                >
-                  {renderCellValue(flatLine[column.Header])}
-                </div>
-              ))}
-            </div>
+              >
+                {renderCellValue(cellValue)}
+              </div>
+            );
+          })}
+        </div>
           );
         })}
       </div>

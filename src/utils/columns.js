@@ -1,4 +1,4 @@
-import { flattenObject } from "./flattenObject.js";
+import { flattenObject } from "./flattenObject";
 
 export const columns = (data, position) => {
   if (!Array.isArray(data) || data.length === 0 || typeof data[0] !== "object" || data[0] == null) {
@@ -8,14 +8,13 @@ export const columns = (data, position) => {
   const flatData = flattenObject(data[0]);
 
   return Object.keys(flatData).map(key => {
-    if (position) {
-      const formattedHeader = key
-        .replace(/([A-Z])/g, " $1") 
-        .replace(/^./, str => str.toUpperCase()); 
-
-      return { Header: formattedHeader };
-    } else {
-      return { Header: key };
-    }
+    const formattedHeader = position ? formatHeader(key) : key;
+    return { Header: formattedHeader, dataKey: key };
   });
 };
+
+function formatHeader(key) {
+  const parts = key.split(".");
+  const lastPart = parts[parts.length - 1];
+  return lastPart.replace(/([A-Z])/g, " $1").replace(/^./, str => str.toUpperCase()).trim();
+}
