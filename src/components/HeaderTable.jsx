@@ -1,8 +1,10 @@
 import React from "react";
+
 import up from "./icons/sort-up-solid.svg";
 import down from "./icons/sort-down-solid.svg";
 
 function HeaderTable({ columnsName, onSortChange, sortConfig }) {
+
   if (!columnsName) return null;
 
   const renderSortArrow = (columnName) => {

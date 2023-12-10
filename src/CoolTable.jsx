@@ -75,13 +75,18 @@ function CoolTable({ data, excludedColumns }) {
 
   return (
     <div className="cool-table">
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-      <NumberRowSelector rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} />
+      <div className="cool-head-table">
+        <NumberRowSelector rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} />
+        <div className="cool-search-input-container">
+          <label htmlFor="search">Search: </label>
+          <input
+            name="search"
+            id="search"
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          /></div>
+      </div>
       <HeaderTable columnsName={columnsName} columnsRef={columnsRef} onSortChange={handleSortChange} sortConfig={sortConfig} />
       <LinesTable linesValues={sortedLines} columnsName={columnsRef} rowsPerPage={rowsPerPage} />
     </div>

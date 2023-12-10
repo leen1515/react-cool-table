@@ -1,4 +1,4 @@
-import { formatIfDate } from "./formatIfDate";
+import {formatIfDate} from "./formatIfDate";
 
 export function renderCellValue(value) {
     if (value === null || value === undefined) return " ";

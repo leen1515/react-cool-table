@@ -6,7 +6,7 @@ function NumberRowSelector({ rowsPerPage, setRowsPerPage }) {
   };
 
   return (
-    <div className="rows-per-page-selector">
+    <div className="cool-selector-container">
       <label htmlFor="rows-per-page">Show</label>
       <select id="rows-per-page" value={rowsPerPage} onChange={handleRowsPerPageChange}>
         <option value="10">10</option>

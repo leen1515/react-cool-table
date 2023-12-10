@@ -1,16 +1,19 @@
+import React from "react";
 import usePagination from "../hookperso/usePaginationPerso";
 import PaginationSection from "./PaginationSection.jsx";
 import { renderCellValue } from "../utils/renderCellValue";
 import { flattenObject } from "../utils/flattenObject";
-import React from "react";
 
 function LinesTable({ linesValues, columnsName, rowsPerPage }) {
-  const { currentPage, totalPages, goToNextPage, goToPrevPage, currentData } = usePagination(linesValues.length, rowsPerPage);
+  const { currentPage, totalPages, goToNextPage, goToPrevPage, currentData, goToPage } = usePagination(linesValues.length, rowsPerPage);
 
   if (!linesValues) return null;
 
   const { start, end } = currentData();
   const currentRows = linesValues.slice(start, end);
+  const startIndex = start + 1;
+  const endIndex = end;
+  const totalEntries = linesValues.length;
 
   return (
     <>
@@ -22,11 +25,7 @@ function LinesTable({ linesValues, columnsName, rowsPerPage }) {
               {columnsName.map((column, cellIndex) => {
                 const cellValue = flatLine[column.dataKey];
                 return (
-                  <div className="cool-cell" key={`${lineIndex}-${cellIndex}`}
-                    aria-label={`${column.Header}: ${cellValue}`}
-                    role="cell"
-                    data-testid={`cell-${lineIndex}-${cellIndex}`}
-                  >
+                  <div className="cool-cell" key={`${lineIndex}-${cellIndex}`}>
                     {renderCellValue(cellValue)}
                   </div>
                 );
@@ -35,12 +34,17 @@ function LinesTable({ linesValues, columnsName, rowsPerPage }) {
           );
         })}
       </div>
+      <div className="cool-pagination-navigation-container">
+      <div className="cool-pagination-info">
+        Showing {startIndex} to {endIndex} of {totalEntries}
+      </div>
       <PaginationSection
         totalPages={totalPages}
         currentPage={currentPage}
         goToNextPage={goToNextPage}
         goToPrevPage={goToPrevPage}
-      />
+        goToPage={goToPage}
+      /></div>
     </>
   );
 }
