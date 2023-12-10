@@ -50,7 +50,9 @@ function Pagination({ totalPages, currentPage, goToPage, goToNextPage, goToPrevP
             <button className="cool-navigation-btn" onClick={goToPrevPage} disabled={currentPage === 1}>
                 Previous
             </button>
+            <button className="cool-navigation-btn" onClick={() => goToPage(1)} disabled={currentPage === 1}>1</button>
             {pageButtons}
+            <button className="cool-navigation-btn" onClick={totalPages} disabled={currentPage === totalPages}> {totalPages} </button>
             <button className="cool-navigation-btn" onClick={goToNextPage} disabled={currentPage === totalPages}>
                 Next
             </button>

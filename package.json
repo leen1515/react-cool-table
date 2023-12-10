@@ -1,6 +1,6 @@
 {
   "name": "react-cool-table",
-  "version": "0.0.81",
+  "version": "0.1.0",
   "description": "A cool table component for React",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
@@ -12,7 +12,12 @@
   },
   "keywords": [
     "react",
-    "table"
+    "table",
+    "filter",
+    "data",
+    "sort",
+    "search",
+    "pagination"
   ],
   "author": "Leen",
   "license": "ISC",
