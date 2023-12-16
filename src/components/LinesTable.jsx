@@ -4,6 +4,22 @@ import PaginationSection from "./PaginationSection.jsx";
 import { renderCellValue } from "../utils/renderCellValue";
 import { flattenObject } from "../utils/flattenObject";
 
+
+/**
+ * @memberOf Table
+ * @name LinesTable
+ * @function
+ * @description
+ * A component that renders the rows of a table based on the provided data.
+ * It includes pagination functionality and displays only a subset of rows per page.
+ * Each cell value is rendered based on its type and format.
+ *
+ * @param {Array<Object>} linesValues - The data to be displayed in the table rows.
+ * @param {Array<{dataKey: string}>} columnsName - Array of objects representing the columns and their respective data keys.
+ * @param {number} rowsPerPage - Number of rows to display per page.
+ * @returns {React.Component} A React component representing the table rows with pagination.
+ */
+
 function LinesTable({ linesValues, columnsName, rowsPerPage }) {
   const { currentPage, totalPages, goToNextPage, goToPrevPage, currentData, goToPage } = usePagination(linesValues.length, rowsPerPage);
 

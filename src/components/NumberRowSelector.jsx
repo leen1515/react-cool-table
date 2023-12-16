@@ -1,5 +1,18 @@
 import React from "react";
 
+
+/**
+ * @name NumberRowSelector
+ * @memberOf Table
+ * @function
+ * @description
+ * A component that allows users to select the number of rows to be displayed per page in a table.
+ * It provides a dropdown menu for the user to choose from predefined options (10, 25, 50, 100).
+ *
+ * @param {number} rowsPerPage - The current number of rows per page.
+ * @param {function} setRowsPerPage - The callback function to set the number of rows per page.
+ * @returns {React.Component} A React component representing a row count selector for a table.
+ */
 function NumberRowSelector({ rowsPerPage, setRowsPerPage }) {
   const handleRowsPerPageChange = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));

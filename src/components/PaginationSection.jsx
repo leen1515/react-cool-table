@@ -1,5 +1,23 @@
 import React from "react";
 
+
+/**
+ * @name Pagination
+ * @memberof Table
+ * @function
+ * @description
+ * A pagination component that displays page buttons based on the total number of pages
+ * and the current page. It allows navigation to a specific page, next page, previous page,
+ * and also handles scenarios where the total pages exceed a maximum button count.
+ *
+ * @param {number} totalPages - The total number of pages.
+ * @param {number} currentPage - The current active page.
+ * @param {function} goToPage - Callback function to navigate to a specific page.
+ * @param {function} goToNextPage - Callback function to navigate to the next page.
+ * @param {function} goToPrevPage - Callback function to navigate to the previous page.
+ * @returns {React.Component} A React component for pagination controls.
+ */
+
 function Pagination({ totalPages, currentPage, goToPage, goToNextPage, goToPrevPage }) {
     const pageButtons = [];
     const maxPageButtons = 10;
