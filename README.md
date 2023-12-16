@@ -66,6 +66,10 @@ React-cool-table au coeur de l'action :
 
 https://leen1515.github.io/hrnet/#/employes
 
+
+React-cool-table DOCS:
+https://leen1515.github.io/react-cool-table/
+
 # REACT-COOL-TABLE
 
 1. Recognizes data
@@ -130,3 +134,7 @@ A component with many possibilities. It's simple, efficient, fast, and cool. Thi
 React-cool-table in action:
 
 https://leen1515.github.io/hrnet/#/employes
+
+
+React-cool-table DOCS:
+https://leen1515.github.io/react-cool-table/
