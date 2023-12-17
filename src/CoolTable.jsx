@@ -31,30 +31,10 @@ function CoolTable({ data, excludedColumns }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
+
   const formatData = columnSelected(data, excludedColumns);
   const columnsName = columns(formatData, true);
   const columnsRef = columns(formatData, false);
-
-  const filteredLines = searchQuery
-    ? formatData.filter(line => {
-      const flatLine = flattenObject(line);
-      return Object.values(flatLine).some(value =>
-        String(value).toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    })
-    : formatData;
-
-
-
-  const handleSortChange = (key) => {
-    let direction = "ascending";
-
-    if (sortConfig.key === key && sortConfig.direction !== null) {
-      direction = sortConfig.direction === "ascending" ? "descending" : sortConfig.direction === "descending" ? null : "ascending";
-    }
-
-    setSortConfig({ key, direction });
-  };
 
   const getDataType = (value) => {
     if (!isNaN(Date.parse(value)) && !isNaN(new Date(value).getDate())) {
@@ -65,18 +45,28 @@ function CoolTable({ data, excludedColumns }) {
     return "string";
   };
 
+  const filteredLines = useMemo(() => {
+    return searchQuery
+      ? formatData.filter(line => {
+          const flatLine = flattenObject(line);
+          return Object.values(flatLine).some(value =>
+            String(value).toLowerCase().includes(searchQuery.toLowerCase())
+          );
+        })
+      : formatData;
+  }, [formatData, searchQuery]);
+
   const sortedLines = useMemo(() => {
     let sortableItems = [...filteredLines];
     if (sortConfig.key && sortConfig.direction !== null) {
       sortableItems.sort((a, b) => {
-        const keyParts = sortConfig.key.split(".");
-        const aValue = keyParts.length > 1 ? a[keyParts[0]][keyParts[1]] : a[sortConfig.key];
-        const bValue = keyParts.length > 1 ? b[keyParts[0]][keyParts[1]] : b[sortConfig.key];
+        const aValue = a[sortConfig.key];
+        const bValue = b[sortConfig.key];
+        const type = getDataType(aValue);
 
         if (aValue == null && bValue == null) return 0;
         if (aValue == null) return -1;
         if (bValue == null) return 1;
-        const type = getDataType(aValue);
 
         switch (type) {
           case "date":
@@ -91,6 +81,14 @@ function CoolTable({ data, excludedColumns }) {
     return sortableItems;
   }, [filteredLines, sortConfig]);
 
+  const handleSortChange = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction !== null) {
+      direction = sortConfig.direction === "ascending" ? "descending" : "ascending";
+    }
+    setSortConfig({ key, direction });
+  };
+
   if (!data) return null;
 
   return (
@@ -98,14 +96,15 @@ function CoolTable({ data, excludedColumns }) {
       <div className="cool-head-table">
         <NumberRowSelector rowsPerPage={rowsPerPage} setRowsPerPage={setRowsPerPage} />
         <div className="cool-search-input-container">
-          <label htmlFor="search">Search: </label>
+          <label htmlFor="search">Search:</label>
           <input
             name="search"
             id="search"
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-          /></div>
+          />
+        </div>
       </div>
       <HeaderTable columnsName={columnsName} columnsRef={columnsRef} onSortChange={handleSortChange} sortConfig={sortConfig} />
       <LinesTable linesValues={sortedLines} columnsName={columnsRef} rowsPerPage={rowsPerPage} />
@@ -113,4 +112,4 @@ function CoolTable({ data, excludedColumns }) {
   );
 }
 
-export default CoolTable;
+export default React.memo(CoolTable);

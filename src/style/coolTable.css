@@ -14,6 +14,7 @@
     vertical-align: middle;
     padding: 0;
     margin: 0;
+    overflow-y: "auto";
 }
 
 .cool-head-table{
@@ -232,7 +233,8 @@
     cursor:pointer;
     border-radius: 5px;
     height:100%;
-    width:50px;
+    min-width:50px;
+    width: fit-content;
     padding: 0;
     margin: 0;
     border:none;
