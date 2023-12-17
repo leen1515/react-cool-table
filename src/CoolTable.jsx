@@ -36,6 +36,8 @@ function CoolTable({ data, excludedColumns }) {
   const columnsName = columns(formatData, true);
   const columnsRef = columns(formatData, false);
 
+  const [resetPaginationKey, setResetPaginationKey] = useState(0); 
+
   const getDataType = (value) => {
     if (!isNaN(Date.parse(value)) && !isNaN(new Date(value).getDate())) {
       return "date";
@@ -89,6 +91,14 @@ function CoolTable({ data, excludedColumns }) {
     setSortConfig({ key, direction });
   };
 
+
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    setResetPaginationKey(prevKey => prevKey + 1);
+  };
+
+
   if (!data) return null;
 
   return (
@@ -102,12 +112,12 @@ function CoolTable({ data, excludedColumns }) {
             id="search"
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e) => handleSearchChange(e)}
           />
         </div>
       </div>
       <HeaderTable columnsName={columnsName} columnsRef={columnsRef} onSortChange={handleSortChange} sortConfig={sortConfig} />
-      <LinesTable linesValues={sortedLines} columnsName={columnsRef} rowsPerPage={rowsPerPage} />
+      <LinesTable linesValues={sortedLines} columnsName={columnsRef} rowsPerPage={rowsPerPage} resetPaginationKey={resetPaginationKey} />
     </div>
   );
 }

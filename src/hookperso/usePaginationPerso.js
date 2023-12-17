@@ -43,7 +43,7 @@ function usePaginationPerso(totalItems, itemsPerPage) {
         setCurrentPage(page);
     };
 
-    return { currentPage, totalPages, goToNextPage, goToPrevPage, goToPage, currentData };
+    return { currentPage, setCurrentPage, totalPages, goToNextPage, goToPrevPage, goToPage, currentData };
 }
 
 export default usePaginationPerso;

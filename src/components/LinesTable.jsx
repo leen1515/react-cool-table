@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import usePagination from "../hookperso/usePaginationPerso";
 import PaginationSection from "./PaginationSection.jsx";
 import { renderCellValue } from "../utils/renderCellValue";
@@ -20,8 +20,12 @@ import { flattenObject } from "../utils/flattenObject";
  * @returns {React.Component} A React component representing the table rows with pagination.
  */
 
-function LinesTable({ linesValues, columnsName, rowsPerPage }) {
-  const { currentPage, totalPages, goToNextPage, goToPrevPage, currentData, goToPage } = usePagination(linesValues.length, rowsPerPage);
+function LinesTable({ linesValues, columnsName, rowsPerPage, resetPaginationKey }) {
+  const { currentPage, setCurrentPage, totalPages, goToNextPage, goToPrevPage, currentData, goToPage } = usePagination(linesValues.length, rowsPerPage);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [resetPaginationKey, setCurrentPage]);
 
   if (!linesValues) return null;
 
@@ -51,16 +55,17 @@ function LinesTable({ linesValues, columnsName, rowsPerPage }) {
         })}
       </div>
       <div className="cool-pagination-navigation-container">
-      <div className="cool-pagination-info">
-        Showing {startIndex} to {endIndex} of {totalEntries}
+        <div className="cool-pagination-info">
+          Showing {startIndex} to {endIndex} of {totalEntries}
+        </div>
+        <PaginationSection
+          totalPages={totalPages}
+          currentPage={currentPage} 
+          goToNextPage={goToNextPage}
+          goToPrevPage={goToPrevPage}
+          goToPage={goToPage}
+        />
       </div>
-      <PaginationSection
-        totalPages={totalPages}
-        currentPage={currentPage}
-        goToNextPage={goToNextPage}
-        goToPrevPage={goToPrevPage}
-        goToPage={goToPage}
-      /></div>
     </>
   );
 }
