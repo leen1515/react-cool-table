@@ -41,11 +41,11 @@ function LinesTable({ linesValues, columnsName, rowsPerPage, resetPaginationKey 
         {currentRows.map((line, lineIndex) => {
           const flatLine = flattenObject(line);
           return (
-            <div className="cool-row-container" key={lineIndex}>
+            <div className="cool-row-container" role="row" key={lineIndex}>
               {columnsName.map((column, cellIndex) => {
                 const cellValue = flatLine[column.dataKey];
                 return (
-                  <div className="cool-cell" key={`${lineIndex}-${cellIndex}`}>
+                  <div className="cool-cell" role="cell" key={`${lineIndex}-${cellIndex}`}>
                     {renderCellValue(cellValue)}
                   </div>
                 );

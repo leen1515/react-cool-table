@@ -40,7 +40,7 @@ function HeaderTable({ columnsName, onSortChange, sortConfig }) {
   return (
     <div className="cool-column-container">
       {columnsName.map((column, i) => (
-        <div className="cool-column" key={i} onClick={() => onSortChange(column.dataKey)}>
+        <div className="cool-column" role="columnheader" key={i} onClick={() => onSortChange(column.dataKey)}>
           <div className="cool-column-title-arrow">{column.Header || " "}
           {renderSortArrow(column.dataKey)}
           </div>
