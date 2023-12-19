@@ -62,8 +62,9 @@ function CoolTable({ data, excludedColumns }) {
     let sortableItems = [...filteredLines];
     if (sortConfig.key && sortConfig.direction !== null) {
       sortableItems.sort((a, b) => {
-        const aValue = a[sortConfig.key];
-        const bValue = b[sortConfig.key];
+        const keyParts = sortConfig.key.split(".");
+        const aValue = keyParts.length > 1 ? a[keyParts[0]][keyParts[1]] : a[sortConfig.key];
+        const bValue = keyParts.length > 1 ? b[keyParts[0]][keyParts[1]] : b[sortConfig.key];
         const type = getDataType(aValue);
 
         if (aValue == null && bValue == null) return 0;
