@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import usePagination from "../hookperso/usePaginationPerso";
 import PaginationSection from "./PaginationSection.jsx";
 import { renderCellValue } from "../utils/renderCellValue";
@@ -60,7 +60,7 @@ function LinesTable({ linesValues, columnsName, rowsPerPage, resetPaginationKey 
         </div>
         <PaginationSection
           totalPages={totalPages}
-          currentPage={currentPage} 
+          currentPage={currentPage}
           goToNextPage={goToNextPage}
           goToPrevPage={goToPrevPage}
           goToPage={goToPage}
