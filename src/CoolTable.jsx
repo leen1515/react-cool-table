@@ -7,7 +7,9 @@ import { columnSelected } from "./utils/columnSelected.js";
 import NumberRowSelector from "./components/NumberRowSelector.jsx";
 import { flattenObject } from "./utils/flattenObject.js";
 
-
+/**
+ * @fileoverview This module need Node.js v18
+ */
 
 /**
  * @namespace Table

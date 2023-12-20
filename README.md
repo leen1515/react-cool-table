@@ -1,4 +1,5 @@
 # REACT-COOL-TABLE
+compatible Node v18 et +
 
 1. Reconnait les données
 
@@ -71,6 +72,8 @@ React-cool-table DOCS:
 https://leen1515.github.io/react-cool-table/
 
 # REACT-COOL-TABLE
+compatible Node v18 and +
+
 
 1. Recognizes data
 
